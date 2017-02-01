@@ -22,7 +22,6 @@ public class HipHop {
     public Log log;
 
     static final HipHopExpander hipHopExpander = new HipHopExpander();
-    static final HipHopEvaluator hiphopEvaluator = new HipHopEvaluator();
 
     //(A) --> (C) <-- (A) --> (C) <-- (A) --> (C) <-- (A) --> (C {id})
     @Description("com.maxdemarzi.hiphop(node) | Return Paths starting from node alternating pattern")
@@ -30,8 +29,7 @@ public class HipHop {
     public Stream<PathResult> hiphop( @Name("startNode") Node startNode) {
         TraversalDescription myTraversal = db.traversalDescription()
                 .depthFirst()
-                .expand(hipHopExpander)
-                .evaluator(hiphopEvaluator);
+                .expand(hipHopExpander);
 
         return  myTraversal.traverse(startNode).stream().map(PathResult::new);
     }
@@ -41,8 +39,7 @@ public class HipHop {
     public Stream<NodeResult> hiphopDistinct( @Name("startNode") Node startNode) {
         TraversalDescription myTraversal = db.traversalDescription()
                 .depthFirst()
-                .expand(hipHopExpander)
-                .evaluator(hiphopEvaluator);
+                .expand(hipHopExpander);
 
         return  myTraversal.traverse(startNode).nodes().stream().distinct().map(NodeResult::new);
     }
