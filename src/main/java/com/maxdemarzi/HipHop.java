@@ -22,6 +22,7 @@ public class HipHop {
     public Log log;
 
     static final HipHopExpander hipHopExpander = new HipHopExpander();
+    static final HipHopExpander hipHopExpanderAddress = new HipHopExpanderAddress();
 
     //(A) --> (C) <-- (A) --> (C) <-- (A) --> (C) <-- (A) --> (C {id})
     @Description("com.maxdemarzi.hiphop(node) | Return Paths starting from node alternating pattern")
@@ -40,6 +41,16 @@ public class HipHop {
         TraversalDescription myTraversal = db.traversalDescription()
                 .depthFirst()
                 .expand(hipHopExpander);
+
+        return  myTraversal.traverse(startNode).nodes().stream().distinct().map(NodeResult::new);
+    }
+
+    @Description("com.maxdemarzi.hiphopdistinctaddress(node) | Return Paths starting from node alternating pattern")
+    @Procedure(name = "com.maxdemarzi.hiphopdistinctaddress", mode = Mode.READ)
+    public Stream<NodeResult> hiphopDistinctAddress( @Name("startNode") Node startNode) {
+        TraversalDescription myTraversal = db.traversalDescription()
+                .depthFirst()
+                .expand(hipHopExpanderAddress);
 
         return  myTraversal.traverse(startNode).nodes().stream().distinct().map(NodeResult::new);
     }
