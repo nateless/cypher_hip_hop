@@ -22,7 +22,7 @@ public class HipHop {
     public Log log;
 
     static final HipHopExpander hipHopExpander = new HipHopExpander();
-    static final HipHopExpander hipHopExpanderAddress = new HipHopExpanderAddress();
+    static final HipHopExpanderAddress hipHopExpanderAddress = new HipHopExpanderAddress();
 
     //(A) --> (C) <-- (A) --> (C) <-- (A) --> (C) <-- (A) --> (C {id})
     @Description("com.maxdemarzi.hiphop(node) | Return Paths starting from node alternating pattern")
